@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-root',
@@ -88,4 +89,11 @@ export class AppComponent implements OnInit {
       );
     }
   }
+
+  reorderColumns($event) {
+    const fromIndex:number = this.displayColumns.indexOf($event.previousContainer.id);
+    const toIndex:number = this.displayColumns.indexOf($event.container.id);
+    moveItemInArray(this.displayColumns, fromIndex, toIndex);
+  }
+  
 }

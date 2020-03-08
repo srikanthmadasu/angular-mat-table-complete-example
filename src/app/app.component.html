@@ -5,10 +5,13 @@
 </div>
 
 <div id="table-container" style="height: 400px; width:400px; overflow: auto;">
-  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)"
+  cdkDropListGroup>
     <ng-container *ngFor="let col of displayColumns; let i=index;" matColumnDef="{{col}}" 
     [sticky]="i==0">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header id="{{col}}"> {{col}}
+      <th mat-header-cell *matHeaderCellDef mat-sort-header id="{{col}}"
+      cdkDropList cdkDropListLockAxis="x" cdkDropListOrientation="horizontal"
+      cdkDrag (cdkDropListDropped)="reorderColumns($event)"> {{col}}
         <button mat-icon-button (click)="$event.stopPropagation(); openFilter(col); ">
           <img src="assets/mat-icons/search-24px.svg">
         </button>
